@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  meal_id: MyString
+  meal_date: 2021-12-02
+  meal_interval: MyString
+
+two:
+  meal_id: MyString
+  meal_date: 2021-12-02
+  meal_interval: MyString

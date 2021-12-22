@@ -1,0 +1,101 @@
+<div class="w-75 menu-box">
+<h4>View My Requests</h4>
+<% if @meal_preferences.size == 0 and @search_key.blank? and @search_value.blank? %>
+    <div class="food-tile">
+        <div class="text-align-center vertical-align-middle full-width">
+            -- You have not submitted any food requests so far --
+        </div>
+    </div>
+<% else %>
+<div>
+<div>
+<%= form_tag(checkin_view_path,method: :post,class: 'full-width display-flex align-items-center filter-form',model: @meal_preference,authenticity_token: false) do |form| %>
+                <tr>
+                    <td colspan="2">
+
+                    </td>
+                    <td>
+                    <div class="mr-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+                            <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                    </div>
+                    </td>
+                    <td>
+                        <div class="dropdown mr-10">
+                        <%= select_tag "search_key" , options_for_select(
+                            [
+                                ['Visit Date','meal_date'],
+                                ['Breakfast','breakfast'],
+                                ['Lunch','lunch'],
+                                ['Dinner','dinner']
+                            ], @search_key) , prompt: 'Search Criteria' , class: 'btn btn-outline-secondary' , required: true%>
+                        </div>
+                    </td>
+                    <td>
+                        <%= text_field_tag :search_value , @search_value , class: "form-control mr-10 w-25" , required: true %>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-secondary mr-10">Search</button>
+                        <%= link_to 'Clear Filter', checkin_view_path , class: "link-secondary mr-10 ml-33" %>
+                    </td>
+                </tr>
+            <% end %>
+            </div>
+    <div class="food-tile">
+        <table class="full-width checkin-view">
+            <tr>
+                <th>Email</th>
+                <th>Visit Date</th>
+                <th>Breakfast</th>
+                <th>Lunch</th>
+                <th>Dinner</th>
+                <th>Meal Pass</th>
+            </tr>
+            <% @meal_preferences.each do |meal_preference| %>
+            <tr>
+                <td><%= meal_preference.office_email %></td>
+                <td><%= meal_preference.meal_date %></td>
+                <td>
+                <% if meal_preference.breakfast == 'yes' %>
+                    <span class="badge bg-success"><%= meal_preference.breakfast %></span>
+                <% else %>
+                    <span class="badge bg-danger"><%= meal_preference.breakfast %></span>
+                <% end %>
+                </td>
+                <td>
+                <% if meal_preference.lunch == 'veg'%>
+                    <div>
+                    <span class="badge bg-info"><%= meal_preference.lunch %></span>
+                    </div>
+                <% elsif meal_preference.lunch == 'non_veg' %>
+                    <div>
+                    <span class="badge bg-dark"><%= meal_preference.lunch %></span>
+                    </div>
+                <% else %>
+                    <span class="badge bg-danger"><%= meal_preference.lunch %></span>
+                <% end %>
+                </td>
+                <td>
+                <% if meal_preference.dinner == 'veg'%>
+                    <div>
+                    <span class="badge bg-info"><%= meal_preference.dinner %></span>
+                    </div>
+                <% elsif meal_preference.dinner == 'non_veg' %>
+                    <div>
+                    <span class="badge bg-dark"><%= meal_preference.dinner %></span>
+                    </div>
+                <% else %>
+                    <span class="badge bg-danger"><%= meal_preference.dinner %></span>
+                <% end %>
+                </td>
+                <td>
+                <%= link_to 'View', checkin_view_pdf_path(meal_preference.meal_date, format: :pdf) , class: "btn btn-primary" , target: '_blank' %>
+                </td>
+            </tr>
+            <% end %>
+        </table>
+        </div>
+    </div>
+<% end %>
+</div>
