@@ -53,14 +53,6 @@ class CheckinController < ApplicationController
         end
     end
 
-    def search
-        if !params[:key].blank? and !params[:value].blank?
-            @results = MealPreference.search( [params[:key]] , params[:value] )
-        else
-            @results = MealPreference.search(['office_email','meal_date','breakfast','lunch','dinner'],'*')
-        end
-    end
-    
     private
 
     def input_params

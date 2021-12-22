@@ -30,33 +30,6 @@ class MealPreference < ActiveRecord::Base
              }
              
            },
-           suggest: {
-            text: search_value,
-            office_email: {
-                term: {
-                size: 1,
-                field: :office_email
-                }
-            },
-            breakfast: {
-                term: {
-                size: 1,
-                field: :breakfast
-                }
-            },
-            lunch: {
-                term: {
-                size: 1,
-                field: :lunch
-                }
-            },
-            dinner: {
-                term: {
-                    size: 1,
-                    field: :dinner
-                }
-            },
-          },
         }
         )
      end

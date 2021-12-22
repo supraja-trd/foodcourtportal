@@ -1,3 +1,8 @@
+//= require jquery
+//= require jquery_ujs
+//= require turbolinks
+//= require_tree .
+
 function handleWeekends(id,meal_date) {
     var day = new Date(meal_date).getUTCDay();
     if([6,0].includes(day)){

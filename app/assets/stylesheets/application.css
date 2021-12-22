@@ -1,3 +1,8 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
 .homeheader {
      background-color: white;   
      background-size: auto;            
@@ -163,7 +168,6 @@
 
 .food-tile {
     background-color: #fff;
-    min-height: 300px;
     margin: 16px;
     border-radius: 4px;
     text-decoration: none;
